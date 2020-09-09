@@ -115,13 +115,21 @@ mod map_test {
         }
     }
 
-    #[should_panic]
     #[test]
-    fn wrap() {
+    fn wrap_should_work() {
         let mut w = World::new();
         let mut c = create(&mut w);
 
         let _ = c.insert(ent(1 << 25), Comp(7));
+    }
+
+    #[should_panic]
+    #[test]
+    fn wrap_should_not_work() {
+        let mut w = World::new();
+        let mut c = create(&mut w);
+
+        let _ = c.insert(ent(1 << 31), Comp(7));
     }
 }
 
